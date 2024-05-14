@@ -12,7 +12,32 @@ from selenium.webdriver.support import expected_conditions as EC
 def calc(x):
     return str(math.log(abs(12 * math.sin(int(x)))))
 
+def task_1_6(html):
+    try:
+        driver.get(html)
+        driver.find_element(By.CSS_SELECTOR, '.first_block input[class="form-control first"]').send_keys("myname")
+        driver.find_element(By.CSS_SELECTOR, '.first_block input[class="form-control second"]').send_keys("mylastname")
+        driver.find_element(By.CSS_SELECTOR, '.first_block input[class="form-control third"]').send_keys("email")
+        driver.find_element(By.CSS_SELECTOR, '.second_block input[class="form-control first"]').send_keys("12345")
+        driver.find_element(By.CSS_SELECTOR, '.second_block input[class="form-control second"]').send_keys("address")
+        driver.find_element(By.CSS_SELECTOR, "button").click()
+        # Проверяем, что смогли зарегистрироваться
+        # ждем загрузки страницы
+        time.sleep(1)
 
+        # находим элемент, содержащий текст
+        welcome_text_elt = driver.find_element(By.TAG_NAME, "h1")
+        # записываем в переменную welcome_text текст из элемента welcome_text_elt
+        welcome_text = welcome_text_elt.text
+
+        # с помощью assert проверяем, что ожидаемый текст совпадает с текстом на странице сайта
+        assert "Congratulations! You have successfully registered!" == welcome_text
+
+    finally:
+        # ожидание чтобы визуально оценить результаты прохождения скрипта
+        time.sleep(10)
+        # закрываем браузер после всех манипуляций
+        driver.quit()
 def task_2_1_5():
     driver.get("https://suninjuly.github.io/math.html")
     x = driver.find_element(By.CSS_SELECTOR, "#input_value").text
@@ -94,4 +119,4 @@ if __name__ == '__main__':
     options = Options()
     options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options)
-    task_2_4_8()
+    task_1_6("https://suninjuly.github.io/registration1.html")
