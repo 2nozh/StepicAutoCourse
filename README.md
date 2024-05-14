@@ -1,2 +1,2 @@
-# StepicAutoCourse
+# StepikAutoCourse
 ## repo for stepik task
